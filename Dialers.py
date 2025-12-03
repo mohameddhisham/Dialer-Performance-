@@ -23,8 +23,16 @@ st.markdown("<style>div[role='alert']{display:none !important;}</style>", unsafe
 # Page title
 st.title("Dialers Performance")
 
-# Sidebar logo (small, centered). Update path if needed
-logo_path = R'E:\ALL\Screenshot 2025-11-26 174333.png'
+# --- PATH CONFIGURATION (ADJUSTED FOR DEPLOYMENT) ---
+# Use relative path './' to work on both Windows local and Linux servers (Streamlit Cloud)
+# IMPORTANT: Ensure the image file is in the same folder as this script.
+logo_filename = 'Screenshot 2025-11-26 174333.png'
+logo_path = os.path.join(os.getcwd(), logo_filename) 
+
+# Fallback: try looking in current directory if absolute path fails
+if not os.path.exists(logo_path):
+    logo_path = logo_filename
+
 if os.path.exists(logo_path):
     try:
         import base64
@@ -52,8 +60,10 @@ DIALER_COLUMN_VARIATIONS = ['dialer', 'Dialer', 'Agent', 'agent', 'sales_rep', '
 
 @st.cache_data
 def load_raw_data():
-    """Loads all five files from the E:/ALL path with mixed formats."""
-    BASE_PATH = "E:/ALL/" 
+    """Loads all files from the current directory (relative path)."""
+    
+    # CHANGE: Use relative path './' for deployment compatibility
+    BASE_PATH = "./" 
     
     try:
         # XLSX Files (Attendance is the source for all dialer names)
@@ -67,10 +77,10 @@ def load_raw_data():
         return df_attendance, df_sales, df_oplans, df_others, df_sheet2
         
     except FileNotFoundError as E:
-        st.error(F"Error loading file: {E}. Please ensure all files are in the E:\\ALL directory and names match exactly.")
+        st.error(F"Error loading file: {E}. Please ensure all data files (xlsx/csv) are uploaded to the root directory of your repository.")
         st.stop()
     except Exception as E:
-        st.error(F"An error occurred during file loading: {E}. If reading Excel files, ensure you have 'openpyxl' installed: `pip install openpyxl`.")
+        st.error(F"An error occurred during file loading: {E}. If reading Excel files, ensure you have 'openpyxl' installed in requirements.txt.")
         st.stop()
 
 # Load data once
