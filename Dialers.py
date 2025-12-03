@@ -18,7 +18,7 @@ warnings.filterwarnings("ignore", category=UserWarning)
 warnings.filterwarnings("ignore", category=FutureWarning)
 
 # Also hide Streamlit 'alert' boxes
-st.markdown("<style>div[role='alert']{display:none !important;}</style>", unsafe_allow_html=True)
+#st.markdown("<style>div[role='alert']{display:none !important;}</style>", unsafe_allow_html=True)
 
 # Page title
 st.title("Dialers Performance")
@@ -1300,3 +1300,4 @@ elif page == "Oplans Performance":
 elif page == "Others Performance":
     # PASS df_sheet2 to the others page function
     show_others_page(df_others, df_oplans, df_attendance, df_sheet2)
+
