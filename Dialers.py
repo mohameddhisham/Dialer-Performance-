@@ -609,8 +609,7 @@ def show_sales_dashboard(df_attendance, df_sales, df_oplans):
 
     # 4e. Dialer Selector (NOW MULTI-SELECT - Dialers returned are already Uppercase/Cleaned)
     dialers_list = get_attended_dialers(df_attendance, selected_year, selected_month_index)
-    selected_dialer = st.sidebar.multiselect("Select Dialer (multiple)", options=dialers_list, default=["All Dialers"], key="dialer_sales")
-
+    selected_dialer = st.sidebar.radio("Select Dialer", options=dialers_list, index=0, key="dialer_sales")
     # --- EXECUTE CORE FUNCTION ---
     df_sales_trend, sales_percentage, avg_sales_per_day, avg_att_per_dialer, avg_att_per_day, total_sales_count = \
         process_and_calculate_data(
@@ -791,7 +790,7 @@ def show_oplans_dashboard(df_attendance, df_oplans):
 
     # Dialer selector for Oplans (multi-select - Dialers returned are already Uppercase/Cleaned)
     dialers_list_op = get_attended_dialers(df_attendance, selected_year_op, selected_month_indices_op)
-    selected_dialer_op = st.sidebar.multiselect("Select Dialer (Oplans)", options=dialers_list_op, default=["All Dialers"], key="dialer_oplans")
+    selected_dialer_op = st.sidebar.radio("Select Dialer (Oplans)", options=dialers_list_op, index=0, key="dialer_oplans")
 
     # --- Normalize column names and CLEAN data ---
     df_oplans_local = _standardize_df(df_oplans, DATE_COLUMN_SALES, DIALER_COLUMN)
@@ -1052,7 +1051,7 @@ def show_others_page(df_others, df_oplans, df_attendance, df_sheet2):
 
     # Dialer selector (multi-select)
     dialers_list_oth = get_attended_dialers(df_attendance, selected_year_oth, selected_month_indices_oth)
-    selected_dialer_oth = st.sidebar.multiselect("Select Dialer (Others)", options=dialers_list_oth, default=["All Dialers"], key="dialer_others")
+    selected_dialer_oth = st.sidebar.radio("Select Dialer (Others)", options=dialers_list_oth, index=0, key="dialer_others")
 
     # --- Normalize column names and CLEAN data ---
     df_others_local = _standardize_df(df_others, DATE_COLUMN_SALES, DIALER_COLUMN)
@@ -1300,4 +1299,5 @@ elif page == "Oplans Performance":
 elif page == "Others Performance":
     # PASS df_sheet2 to the others page function
     show_others_page(df_others, df_oplans, df_attendance, df_sheet2)
+
 
