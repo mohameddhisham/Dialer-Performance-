@@ -609,7 +609,7 @@ def show_sales_dashboard(df_attendance, df_sales, df_oplans):
 
     # 4e. Dialer Selector (NOW MULTI-SELECT - Dialers returned are already Uppercase/Cleaned)
     dialers_list = get_attended_dialers(df_attendance, selected_year, selected_month_index)
-    st.sidebar.markdown("##### Select Dialer(s)")   selected_dialer = []   if "All Dialers" in dialers_list:   all_dialers_selected = st.sidebar.checkbox("All Dialers", value=True, key="dialer_sales_all")   if all_dialers_selected:   selected_dialer = dialers_list # Pass all dialers, including "All Dialers" for the filtering logic   else:   for dialer_name in dialers_list:   if dialer_name != "All Dialers":   if st.sidebar.checkbox(dialer_name, key=f"dialer_sales_{dialer_name}"):   selected_dialer.append(dialer_name)   else:   # Fallback if list is empty or doesn't include the 'All' option   for dialer_name in dialers_list:   if st.sidebar.checkbox(dialer_name, key=f"dialer_sales_{dialer_name}"):   selected_dialer.append(dialer_name)   if not selected_dialer and "All Dialers" in dialers_list: # Default to all if none selected   selected_dialer = ["All Dialers"]
+    selected_dialer = st.sidebar.radio("Select Dialer", options=dialers_list, index=0, key="dialer_sales")
     # --- EXECUTE CORE FUNCTION ---
     df_sales_trend, sales_percentage, avg_sales_per_day, avg_att_per_dialer, avg_att_per_day, total_sales_count = \
         process_and_calculate_data(
@@ -1299,6 +1299,7 @@ elif page == "Oplans Performance":
 elif page == "Others Performance":
     # PASS df_sheet2 to the others page function
     show_others_page(df_others, df_oplans, df_attendance, df_sheet2)
+
 
 
 
