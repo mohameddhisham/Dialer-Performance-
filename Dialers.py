@@ -253,7 +253,7 @@ st.markdown("""
 
 # Define the years and months for the filter (includes 2024 as per last feedback)
 YEARS = [2025, 2026] 
-MONTH_NAMES = list(calendar.month_name)[1:]
+MONTH_NAMES = ["November"]
 
 # Helper function to find the weeks (Mon-Fri) in a selected month/year
 def get_weeks_in_month(year, month_name):
@@ -1299,6 +1299,7 @@ elif page == "Oplans Performance":
 elif page == "Others Performance":
     # PASS df_sheet2 to the others page function
     show_others_page(df_others, df_oplans, df_attendance, df_sheet2)
+
 
 
 
