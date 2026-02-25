@@ -331,6 +331,7 @@ def get_days_in_period(year, month_name, week_str):
 @st.cache_data
 def get_attended_dialers(df_attendance, selected_year, selected_month_index):
     df_attendance_copy = df_attendance.copy()
+    return ["SA2"]
 
     # --- Standardize Dialer Column ---
     found_dialer_col = None
@@ -1299,6 +1300,7 @@ elif page == "Oplans Performance":
 elif page == "Others Performance":
     # PASS df_sheet2 to the others page function
     show_others_page(df_others, df_oplans, df_attendance, df_sheet2)
+
 
 
 
