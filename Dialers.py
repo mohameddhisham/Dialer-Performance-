@@ -592,7 +592,7 @@ def show_sales_dashboard(df_attendance, df_sales, df_oplans):
     selected_year = st.sidebar.selectbox("Select Year", options=YEARS, index=YEARS.index(2025) if 2025 in YEARS else 0, key="year_sales")
 
     # 4b. Month Selector (multi-select)
-    default_month_name = "November"
+    default_month_name = datetime.now().strftime("%B")
     selected_month_names = st.sidebar.multiselect(
         "Select Month (you may choose multiple)",
         options=MONTH_NAMES,
@@ -777,7 +777,7 @@ def show_oplans_dashboard(df_attendance, df_oplans):
     selected_year_op = st.sidebar.selectbox("Select Year (Oplans)", options=YEARS, index=YEARS.index(2025) if 2025 in YEARS else 0, key="year_oplans")
 
     # Month multiselect
-    default_month_name = "November"
+    default_month_name = datetime.now().strftime("%B")
     selected_month_names_op = st.sidebar.multiselect(
         "Select Month (you may choose multiple)",
         options=MONTH_NAMES,
@@ -1037,7 +1037,7 @@ def show_others_page(df_others, df_oplans, df_attendance, df_sheet2):
     selected_year_oth = st.sidebar.selectbox("Select Year (Others)", options=YEARS, index=YEARS.index(2025) if 2025 in YEARS else 0, key="year_others")
 
     # Month multiselect
-    default_month_name = "November"
+    default_month_name = datetime.now().strftime("%B")
     selected_month_names_oth = st.sidebar.multiselect(
         "Select Month (you may choose multiple)",
         options=MONTH_NAMES,
@@ -1313,3 +1313,4 @@ elif page == "Oplans Performance":
 elif page == "Others Performance":
     # PASS df_sheet2 to the others page function
     show_others_page(df_others, df_oplans, df_attendance, df_sheet2)
+
