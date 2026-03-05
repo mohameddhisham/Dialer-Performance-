@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import os
 from datetime import datetime, timedelta
-import calendar 
+import calendar
 import plotly.express as px
 import warnings
 import math
@@ -1300,3 +1300,4 @@ elif page == "Oplans Performance":
 elif page == "Others Performance":
     # PASS df_sheet2 to the others page function
     show_others_page(df_others, df_oplans, df_attendance, df_sheet2)
+
