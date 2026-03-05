@@ -86,6 +86,18 @@ def load_raw_data():
 # Load data once
 df_attendance, df_sales, df_oplans, df_others, df_sheet2 = load_raw_data()
 
+
+# --- TEMPORARY DATA DEBUGGER ---
+# This prints out the years that Pandas successfully extracted from your CSV
+try:
+    oplans_years = pd.to_datetime(df_oplans[DATE_COLUMN_SALES], errors='coerce', dayfirst=True).dt.year.dropna().unique()
+    sales_years = pd.to_datetime(df_sales[DATE_COLUMN_SALES], errors='coerce', dayfirst=True).dt.year.dropna().unique()
+    st.warning(f"🔧 **Data Debugger:**\n\nYears successfully read in Oplans: `{oplans_years}`\n\nYears successfully read in Sales: `{sales_years}`")
+except Exception as e:
+    pass
+# -------------------------------
+
+
 # --- 3. CUSTOM STYLING (Dark Theme and Red KPI Cards) ---
 
 st.markdown("""
@@ -1321,6 +1333,12 @@ def show_others_page(df_others, df_oplans, df_attendance, df_sheet2):
 
 
 # --- 6. MAIN APP EXECUTION ---
+
+# Add the Reload button right above the page navigator
+st.sidebar.markdown("---")
+if st.sidebar.button("🔄 Force Reload Data"):
+    st.cache_data.clear()
+    st.rerun()
 
 # Create a simple radio selector in the sidebar for page navigation
 page = st.sidebar.radio(
